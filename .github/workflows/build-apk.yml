@@ -22,13 +22,12 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Set up EAS
-        uses: expo/expo-github-action@v8
-        with:
-          eas-version: latest
-          token: ${{ secrets.EXPO_TOKEN }}
+      - name: Install eas-cli
+        run: npm install -g eas-cli
 
       - name: Build APK on Expo's servers
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
         run: eas build --platform android --profile preview --non-interactive --wait --output=./app-build.apk
 
       - name: Attach the APK to this workflow run
