@@ -7,7 +7,11 @@
     "userInterfaceStyle": "light",
     "android": {
       "package": "org.logiss.field",
-      "permissions": ["CAMERA"]
+      "permissions": [
+        "CAMERA",
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO"
+      ]
     },
     "ios": {
       "bundleIdentifier": "org.logiss.field",
@@ -22,6 +26,12 @@
           "cameraPermission": "LOGISS needs camera access to photograph students and laptops during registration."
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "5c42b5d6-cce3-4734-848d-1ac97680f797"
+      }
+    },
+    "owner": "smartchuksempires-team"
   }
 }
