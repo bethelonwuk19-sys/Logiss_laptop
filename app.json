@@ -1,0 +1,27 @@
+{
+  "expo": {
+    "name": "LOGISS Field",
+    "slug": "logiss-field",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "android": {
+      "package": "org.logiss.field",
+      "permissions": ["CAMERA"]
+    },
+    "ios": {
+      "bundleIdentifier": "org.logiss.field",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Used to photograph students and laptops during registration."
+      }
+    },
+    "plugins": [
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "LOGISS needs camera access to photograph students and laptops during registration."
+        }
+      ]
+    ]
+  }
+}

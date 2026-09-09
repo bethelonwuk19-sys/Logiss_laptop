@@ -1,0 +1,38 @@
+name: Build Android APK
+
+# Runs whenever you push to main, or you can trigger it manually from
+# the "Actions" tab on GitHub with the "Run workflow" button.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Set up EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Build APK on Expo's servers
+        run: eas build --platform android --profile preview --non-interactive --wait --output=./app-build.apk
+
+      - name: Attach the APK to this workflow run
+        uses: actions/upload-artifact@v4
+        with:
+          name: logiss-field-apk
+          path: ./app-build.apk
