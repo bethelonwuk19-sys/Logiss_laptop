@@ -28,7 +28,13 @@ jobs:
       - name: Build APK on Expo's servers
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
-        run: eas build --platform android --profile preview --non-interactive --wait --output=./app-build.apk
+        run: eas build --platform android --profile preview --non-interactive --wait --json > build-output.json
+
+      - name: Download the finished APK
+        run: |
+          URL=$(node -e "const d=require('./build-output.json'); const b=Array.isArray(d)?d[0]:d; console.log(b.artifacts.buildUrl)")
+          echo "Downloading from $URL"
+          curl -L "$URL" -o app-build.apk
 
       - name: Attach the APK to this workflow run
         uses: actions/upload-artifact@v4
